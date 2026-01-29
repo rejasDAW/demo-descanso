@@ -3,6 +3,17 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, Heart } from "lucide-react";
+import { useWishlist } from "@/context/WishlistContext";
+
+interface ProductProps {
+    id: string;
+    name: string;
+    category: string;
+    price: string;
+    image: string;
+    delay?: number;
+}
+
 export default function ProductCard({ id, name, category, price, image, delay = 0 }: ProductProps) {
     const { isInWishlist, toggleWishlist } = useWishlist();
     const isLiked = isInWishlist(id);
