@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { toast } from "sonner"; // Assuming we might add toast later, or just console for now. We don't have sonner installed? Let's stick to simple state.
+
 
 interface WishlistContextType {
     items: string[]; // Array of Product IDs
