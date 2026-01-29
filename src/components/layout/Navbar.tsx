@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Search, Menu, ShoppingBag, X, ChevronRight, Heart } from "lucide-react";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import { PRODUCTS } from "@/data/products";
@@ -169,7 +170,15 @@ export default function Navbar() {
                                         onClick={() => handleProductClick(product.id)}
                                         className="flex items-center gap-4 px-4 py-3 hover:bg-gray-50 dark:hover:bg-white/5 cursor-pointer border-b border-gray-50 dark:border-gray-800 last:border-0 transition-colors group"
                                     >
-                                        <img src={product.image} alt={product.name} className="w-10 h-10 object-cover rounded-md" />
+                                        <div className="relative w-10 h-10 flex-shrink-0">
+                                            <Image
+                                                src={product.image}
+                                                alt={product.name}
+                                                fill
+                                                className="object-cover rounded-md"
+                                                sizes="40px"
+                                            />
+                                        </div>
                                         <div className="flex-1 min-w-0">
                                             <h4 className="text-sm font-medium text-gray-900 dark:text-white truncate group-hover:text-luxury-gold transition-colors">{product.name}</h4>
                                             <p className="text-xs text-gray-500 truncate">{product.category}</p>

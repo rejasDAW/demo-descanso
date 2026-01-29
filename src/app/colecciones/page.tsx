@@ -4,6 +4,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 const COLLECTIONS = [
     {
@@ -58,15 +59,19 @@ export default function CollectionsPage() {
                             <section key={col.id} className="relative h-screen w-full overflow-hidden group">
                                 {/* Background Image */}
                                 <div className="absolute inset-0">
-                                    <img
+                                    <Image
                                         src={col.image}
                                         alt={col.title}
-                                        className="w-full h-full object-cover transition-transform duration-[3s] group-hover:scale-105"
+                                        fill
+                                        className="object-cover transition-transform duration-[3s] group-hover:scale-105"
+                                        sizes="100vw"
+                                        priority={idx === 0}
+                                        quality={90}
                                     />
                                     {/* Gradient Overlay based on position */}
                                     <div className={`absolute inset-0 bg-gradient-to-r ${isEven
-                                            ? 'from-black/80 via-black/40 to-transparent'
-                                            : 'from-transparent via-black/40 to-black/80'
+                                        ? 'from-black/80 via-black/40 to-transparent'
+                                        : 'from-transparent via-black/40 to-black/80'
                                         }`} />
                                 </div>
 

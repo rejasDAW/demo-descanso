@@ -6,11 +6,13 @@ import { WishlistProvider } from "@/context/WishlistContext";
 const playfair = Playfair_Display({
   variable: "--font-serif",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const inter = Inter({
   variable: "--font-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
