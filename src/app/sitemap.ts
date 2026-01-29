@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { PRODUCTS } from './data/products';
+import { PRODUCTS } from '@/data/products';
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://demo-mobiliario.vercel.app'; // Placeholder domain
