@@ -3,29 +3,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, Heart } from "lucide-react";
-import { motion } from "framer-motion";
-import { useWishlist } from "@/context/WishlistContext";
-
-interface ProductProps {
-    id: string;
-    name: string;
-    category: string;
-    price: string;
-    image: string;
-    delay?: number;
-}
-
 export default function ProductCard({ id, name, category, price, image, delay = 0 }: ProductProps) {
     const { isInWishlist, toggleWishlist } = useWishlist();
     const isLiked = isInWishlist(id);
 
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: delay }}
-            className="group relative"
+        <div
+            className="group relative animate-fade-in-up opacity-0 fill-mode-forwards"
+            style={{ animationDelay: `${delay}s` }}
         >
             <div className="aspect-[3/4] overflow-hidden bg-gray-100 dark:bg-gray-800 relative rounded-sm">
                 <Link href={`/producto/${id}`} className="block w-full h-full relative">
@@ -67,6 +52,6 @@ export default function ProductCard({ id, name, category, price, image, delay = 
                 </div>
                 <p className="font-sans text-sm font-medium text-gray-900 dark:text-gray-200">{price}</p>
             </div>
-        </motion.div>
+        </div>
     );
 }

@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
@@ -24,30 +23,21 @@ export default function Hero() {
             </div>
 
             <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-4 sm:px-6 lg:px-8">
-                <motion.span
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-luxury-gold uppercase tracking-[0.3em] text-sm md:text-base mb-4 font-medium"
+                <span
+                    className="text-luxury-gold uppercase tracking-[0.3em] text-sm md:text-base mb-4 font-medium opacity-0 animate-fade-in-up delay-100"
                 >
                     Alta Ebanistería &middot; Confort Absoluto
-                </motion.span>
+                </span>
 
-                <motion.h1
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.4 }}
-                    className="font-serif text-5xl md:text-7xl lg:text-8xl text-white mb-8 leading-tight"
+                <h1
+                    className="font-serif text-5xl md:text-7xl lg:text-8xl text-white mb-8 leading-tight opacity-0 animate-fade-in-up delay-200"
                 >
                     Redefiniendo el<br />
                     <span className="italic font-light">Descanso</span>
-                </motion.h1>
+                </h1>
 
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.6 }}
-                    className="flex flex-col sm:flex-row gap-4"
+                <div
+                    className="flex flex-col sm:flex-row gap-4 opacity-0 animate-fade-in-up delay-300"
                 >
                     <Link
                         href="/catalogo"
@@ -64,21 +54,18 @@ export default function Hero() {
                         Contactar Distribuidor
                         <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                     </Link>
-                </motion.div>
+                </div>
             </div>
 
             {/* Scroll indicator */}
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.5, duration: 1 }}
-                className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+            <div
+                className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-0 animate-fade-in-up delay-500"
             >
                 <span className="text-white/60 text-[10px] uppercase tracking-widest">Scroll</span>
                 <div className="w-[1px] h-12 bg-white/20 overflow-hidden">
                     <div className="w-full h-1/2 bg-white animate-scroll-down" />
                 </div>
-            </motion.div>
+            </div>
         </div>
     );
 }
