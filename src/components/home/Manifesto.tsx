@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Manifesto() {
     return (
         <section className="py-24 bg-luxury-cream dark:bg-black transition-colors text-center">
@@ -13,11 +15,15 @@ export default function Manifesto() {
                     El tiempo de seleccionar la madera perfecta, el tiempo de curtir la piel,
                     y el tiempo que usted disfrutará de una pieza hecha para durar generaciones.
                 </p>
-                <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Signature_sample.svg"
-                    alt="Firma Fundador"
-                    className="h-12 mx-auto opacity-50"
-                />
+                <div className="relative h-12 w-48 mx-auto opacity-50">
+                    <Image
+                        src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Signature_sample.svg"
+                        alt="Firma Fundador"
+                        fill
+                        className="object-contain"
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                </div>
                 <p className="text-xs uppercase tracking-widest text-gray-400 mt-2">Fundador & Artesano</p>
             </div>
         </section>
