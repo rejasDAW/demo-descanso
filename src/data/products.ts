@@ -8,6 +8,7 @@ export interface Product {
     image: string;
     images?: string[]; // Gallery support
     colors?: { name: string; hex: string; image?: string }[];
+    isNew?: boolean;
 }
 
 export const PRODUCTS: Product[] = [
