@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Heart } from "lucide-react";
 import { motion } from "framer-motion";
+import { useWishlist } from "@/context/WishlistContext";
 
 interface ProductProps {
     id: string;
@@ -14,6 +15,9 @@ interface ProductProps {
 }
 
 export default function ProductCard({ id, name, category, price, image, delay = 0 }: ProductProps) {
+    const { isInWishlist, toggleWishlist } = useWishlist();
+    const isLiked = isInWishlist(id);
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -32,8 +36,19 @@ export default function ProductCard({ id, name, category, price, image, delay = 
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
                 </Link>
 
+                {/* Wishlist Toggle Button - Top Left */}
+                <button
+                    onClick={(e) => {
+                        e.preventDefault();
+                        toggleWishlist(id);
+                    }}
+                    className="absolute top-4 left-4 z-10 p-2 text-white hover:scale-110 transition-transform duration-200"
+                >
+                    <Heart className={`w-6 h-6 drop-shadow-md transition-colors ${isLiked ? 'fill-red-500 stroke-red-500' : 'stroke-white fill-black/20'}`} />
+                </button>
+
                 {/* Quick action button that appears on hover */}
-                <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0">
+                <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0 hidden md:block">
                     <Link href={`/producto/${id}`} className="bg-white dark:bg-gray-900 dark:text-white p-3 rounded-full shadow-lg hover:bg-luxury-gold hover:text-white dark:hover:bg-luxury-gold transition-colors block">
                         <ArrowUpRight className="w-5 h-5" />
                     </Link>

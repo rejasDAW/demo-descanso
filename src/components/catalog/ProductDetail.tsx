@@ -7,6 +7,8 @@ import { ArrowLeft, Check, Mail, MapPin } from "lucide-react";
 import Link from "next/link";
 import { PRODUCTS } from "@/data/products";
 
+import { useWishlist } from "@/context/WishlistContext";
+
 interface ProductDetailProps {
     slug: string;
 }
@@ -17,6 +19,10 @@ export default function ProductDetail({ slug }: ProductDetailProps) {
 
     // Configurator State
     const [selectedColor, setSelectedColor] = React.useState(product.colors ? product.colors[0] : null);
+
+    // Wishlist Logic
+    const { isInWishlist, toggleWishlist } = useWishlist();
+    const isLiked = isInWishlist(product.id);
 
     // Update selected color if product changes
     React.useEffect(() => {
@@ -42,11 +48,19 @@ export default function ProductDetail({ slug }: ProductDetailProps) {
                                 alt={product.name}
                                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                             />
-                            {/* Wishlist Button Placeholder */}
-                            <button className="absolute top-4 right-4 p-3 bg-white/80 dark:bg-black/50 backdrop-blur-sm rounded-full text-gray-900 dark:text-white hover:text-red-500 dark:hover:text-red-400 transition-colors">
-                                <span className="sr-only">Añadir a favoritos</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                            {/* Wishlist Button */}
+                            <button
+                                onClick={() => toggleWishlist(product.id)}
+                                className="absolute top-4 right-4 p-3 bg-white/80 dark:bg-black/50 backdrop-blur-sm rounded-full text-gray-900 dark:text-white hover:text-red-500 dark:hover:text-red-400 transition-colors z-20"
+                            >
+                                <span className="sr-only">{isLiked ? 'Quitar de favoritos' : 'Añadir a favoritos'}</span>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className={`h-5 w-5 transition-colors ${isLiked ? 'fill-red-500 stroke-red-500' : 'stroke-currentColor fill-none'}`}
+                                    viewBox="0 0 24 24"
+                                    strokeWidth={2}
+                                >
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                                 </svg>
                             </button>
                         </div>

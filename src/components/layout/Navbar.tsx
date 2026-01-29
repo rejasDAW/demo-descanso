@@ -2,16 +2,18 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Search, Menu, ShoppingBag, X, ChevronRight } from "lucide-react";
+import { Search, Menu, ShoppingBag, X, ChevronRight, Heart } from "lucide-react";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import { PRODUCTS } from "@/data/products";
 import { useRouter } from "next/navigation";
+import { useWishlist } from "@/context/WishlistContext";
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     const router = useRouter();
+    const { items } = useWishlist();
 
     // Prevent body scroll when menu/search is open
     useEffect(() => {
@@ -73,24 +75,27 @@ export default function Navbar() {
                         </div>
 
                         {/* Icons */}
-                        <div className="flex items-center space-x-4 md:space-x-6 z-50">
-                            <ThemeToggle />
-                            <button
-                                onClick={() => setIsSearchOpen(true)}
-                                className="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
-                            >
-                                <Search className="h-5 w-5" />
-                            </button>
-                            <button className="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors hidden md:block">
-                                <ShoppingBag className="h-5 w-5" />
-                            </button>
-                            <button
-                                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                                className="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors md:hidden"
-                            >
-                                {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-                            </button>
-                        </div>
+                        <ThemeToggle />
+                        <Link href="/favoritos" className="relative text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors group">
+                            <Heart className={`h-5 w-5 ${items.length > 0 ? 'fill-luxury-gold stroke-luxury-gold' : ''} transition-colors`} />
+                            {items.length > 0 && (
+                                <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-luxury-gold text-[10px] font-bold text-white shadow-sm ring-1 ring-white dark:ring-black">
+                                    {items.length}
+                                </span>
+                            )}
+                        </Link>
+                        <button
+                            onClick={() => setIsSearchOpen(true)}
+                            className="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+                        >
+                            <Search className="h-5 w-5" />
+                        </button>
+                        <button
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            className="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors md:hidden"
+                        >
+                            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                        </button>
                     </div>
                 </div>
             </nav>
