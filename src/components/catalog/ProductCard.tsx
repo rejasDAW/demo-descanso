@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight, Heart } from "lucide-react";
 import { motion } from "framer-motion";
 import { useWishlist } from "@/context/WishlistContext";
@@ -26,14 +27,16 @@ export default function ProductCard({ id, name, category, price, image, delay = 
             transition={{ duration: 0.6, delay: delay }}
             className="group relative"
         >
-            <div className="aspect-[3/4] overflow-hidden bg-gray-100 dark:bg-gray-800 relative">
-                <Link href={`/producto/${id}`}>
-                    {/* Use standard img tag for demo simplicity or Next/Image in prod */}
-                    <div
-                        className="h-full w-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                        style={{ backgroundImage: `url('${image}')` }}
+            <div className="aspect-[3/4] overflow-hidden bg-gray-100 dark:bg-gray-800 relative rounded-sm">
+                <Link href={`/producto/${id}`} className="block w-full h-full relative">
+                    <Image
+                        src={image}
+                        alt={name}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 pointer-events-none" />
                 </Link>
 
                 {/* Wishlist Toggle Button - Top Left */}

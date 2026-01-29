@@ -5,6 +5,7 @@ import ProductCard from "@/components/catalog/ProductCard";
 import Footer from "@/components/layout/Footer";
 import { PRODUCTS } from "@/data/products";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
 import { getCategoryConfig } from "@/data/categories";
 
@@ -26,14 +27,20 @@ export default function CategoryClient({ slug }: CategoryClientProps) {
 
             {/* Visual Hero Section */}
             <div className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
-                {/* Background Image with Parallax-like feel */}
-                <div
-                    className="absolute inset-0 w-full h-full bg-cover bg-center transition-transform duration-1000 hover:scale-105"
-                    style={{ backgroundImage: `url('${bgImage}')` }}
-                />
+                {/* Background Image Optimized */}
+                <div className="absolute inset-0">
+                    <Image
+                        src={bgImage}
+                        alt={categoryTitle}
+                        fill
+                        priority
+                        className="object-cover object-center transition-transform duration-1000 hover:scale-105"
+                        sizes="100vw"
+                    />
+                </div>
 
                 {/* Dark Overlay for contrast */}
-                <div className="absolute inset-0 bg-black/50 dark:bg-black/60" />
+                <div className="absolute inset-0 bg-black/50 dark:bg-black/60 pointer-events-none" />
 
                 {/* Content */}
                 <div className="relative z-10 text-center px-4 max-w-4xl mx-auto pt-20">

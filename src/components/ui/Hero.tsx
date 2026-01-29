@@ -4,14 +4,22 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
+import Image from "next/image";
+
 export default function Hero() {
     return (
         <div className="relative h-screen w-full overflow-hidden bg-gray-900">
-            {/* Background Image Placeholder - In real app use a high-res image */}
-            <div
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-60 scale-105"
-                style={{ backgroundImage: "url('https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?q=80&w=2070&auto=format&fit=crop')" }}
-            >
+            {/* Background Image Optimized with Next/Image */}
+            <div className="absolute inset-0">
+                <Image
+                    src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?q=80&w=2070&auto=format&fit=crop"
+                    alt="Interior de lujo con sofá blanco"
+                    fill
+                    priority
+                    quality={90}
+                    className="object-cover object-center opacity-60 scale-105"
+                    sizes="100vw"
+                />
                 <div className="absolute inset-0 bg-black/40" />
             </div>
 
